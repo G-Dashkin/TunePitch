@@ -24,3 +24,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "TunePitch"
 include(":app")
+include(":core:ui")
+include(":core:di")
+include(":core:utils")
+include(":feature:home")
