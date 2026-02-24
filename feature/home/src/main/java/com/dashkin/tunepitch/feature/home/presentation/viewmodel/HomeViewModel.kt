@@ -48,14 +48,18 @@ class HomeViewModel(
     private fun loadData() {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
-            val exercises = getExercises()
-            val bestResults = getBestResults()
-            _state.update {
-                it.copy(
-                    exercises = exercises,
-                    bestResults = bestResults,
-                    isLoading = false
-                )
+            try {
+                val exercises = getExercises()
+                val bestResults = getBestResults()
+                _state.update {
+                    it.copy(
+                        exercises = exercises,
+                        bestResults = bestResults,
+                        isLoading = false
+                    )
+                }
+            } catch (e: Exception) {
+                _state.update { it.copy(isLoading = false) }
             }
         }
     }
