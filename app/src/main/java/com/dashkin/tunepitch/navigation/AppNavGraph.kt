@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.dashkin.tunepitch.feature.home.presentation.screen.HomeScreen
+import com.dashkin.tunepitch.feature.tuner.presentation.screen.TunerScreen
 
 object Routes {
     const val HOME = "home"
@@ -26,8 +27,13 @@ fun AppNavGraph(navController: NavHostController) {
 //                    navController.navigate(Routes.exercise(exerciseId))
                 },
                 onNavigateToTuner = {
-//                    navController.navigate(Routes.TUNER)
+                    navController.navigate(Routes.TUNER)
                 }
+            )
+        }
+        composable(Routes.TUNER) {
+            TunerScreen(
+                onNavigateBack = { navController.popBackStack() }
             )
         }
     }

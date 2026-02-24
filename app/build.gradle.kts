@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":core:utils"))
     implementation(project(":core:audio"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:tuner"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

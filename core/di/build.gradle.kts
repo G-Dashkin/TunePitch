@@ -22,4 +22,5 @@ dependencies {
 
     implementation(project(":core:audio"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:tuner"))
 }
