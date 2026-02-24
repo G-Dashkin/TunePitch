@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -49,6 +51,7 @@ import com.dashkin.tunepitch.feature.tuner.presentation.component.PitchMeter
 import com.dashkin.tunepitch.feature.tuner.presentation.state.TunerError
 import com.dashkin.tunepitch.feature.tuner.presentation.state.TunerEvent
 import com.dashkin.tunepitch.feature.tuner.presentation.viewmodel.TunerViewModel
+import com.dashkin.tunepitch.core.audio.model.PitchResult
 import org.koin.androidx.compose.koinViewModel
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -124,7 +127,7 @@ fun TunerScreen(onNavigateBack: () -> Unit) {
 @Composable
 private fun TunerContent(
     centsOffset: Float,
-    pitchResult: com.dashkin.tunepitch.core.audio.model.PitchResult?,
+    pitchResult: PitchResult?,
     isRecording: Boolean
 ) {
     val centsLabel = buildCentsLabel(pitchResult?.centsOffset)
@@ -217,9 +220,9 @@ private fun NoPermissionContent(onRetry: () -> Unit) {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        androidx.compose.material3.OutlinedButton(
+        OutlinedButton(
             onClick = onRetry,
-            border = androidx.compose.foundation.BorderStroke(1.dp, NeonCyan)
+            border = BorderStroke(1.dp, NeonCyan)
         ) {
             Text(text = "Grant Permission", color = NeonCyan)
         }
