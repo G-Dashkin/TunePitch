@@ -19,13 +19,16 @@ internal class AudioRecordWrapper {
     // Recording starts on the first collection and stops when the collector is cancelled.
     // The flow runs on Dispatchers.IO because AudioRecord.read is a blocking call.
     fun audioFlow(): Flow<ShortArray> = flow {
-        val audioRecord = createAudioRecord() ?: return@flow
+        val audioRecord = createAudioRecord()
+            ?: throw IllegalStateException(
+                "Failed to initialize AudioRecord. Check RECORD_AUDIO permission and microphone availability."
+            )
         audioRecord.startRecording()
         try {
             val buffer = ShortArray(AudioConfig.BUFFER_SIZE_SAMPLES)
             while (currentCoroutineContext().isActive) {
                 val samplesRead = audioRecord.read(buffer, 0, buffer.size)
-                if (samplesRead > 0) emit(buffer.copyOf())
+                if (samplesRead > 0) emit(buffer.copyOf(samplesRead))
             }
         } finally {
             audioRecord.stop()
