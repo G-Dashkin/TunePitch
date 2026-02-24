@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dashkin.tunepitch.core.di"
+    namespace = "com.dashkin.tunepitch.core.audio"
     compileSdk = 36
 
     defaultConfig {
@@ -17,9 +17,15 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:utils"))
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
 
-    implementation(project(":core:audio"))
-    implementation(project(":feature:home"))
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk.core)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
